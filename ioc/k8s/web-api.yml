@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-api
+  template:
+    metadata:
+      labels:
+        app: web-api
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: web-api
+          image: mcr.microsoft.com/web-api/web-api:latest
+          ports:
+            - containerPort: 80
+              name: web-api-http
+            # - containerPort: 443
+            #   name: web-api-https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      name: web-api-http
+    # - port: 443
+    #   name: web-api-https
+  selector:
+    app: web-api
