@@ -10,13 +10,6 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 https://learn.hashicorp.com/tutorials/terraform/azure-build
 
-```shell
-az login
-```
-
-```shell
-az account set --subscription "<subscription>"
-```
 
 ### installing terraform
 
