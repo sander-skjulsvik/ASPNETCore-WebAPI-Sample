@@ -1,17 +1,16 @@
 
-# k8s tut: https://learn.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster?tabs=azure-cli
 
 
 resource "azurerm_resource_group" "k8s-ASPNETCore-WebAPI-Sample" {
-  name     = "k8s-ASPNETCore-WebAPI-Sample"
+  name     = var.web_api_name
   location = "West Europe"
 }
 
 resource "azurerm_kubernetes_cluster" "k8s-ASPNETCore-WebAPI-Sample" {
-  name                = "example-aks1"
+  name                = var.web_api_name
   location            = azurerm_resource_group.k8s-ASPNETCore-WebAPI-Sample.location
   resource_group_name = azurerm_resource_group.k8s-ASPNETCore-WebAPI-Sample.name
-  dns_prefix          = "aspnet"
+  dns_prefix          = var.web_api_name
 
   default_node_pool {
     name       = "default"
